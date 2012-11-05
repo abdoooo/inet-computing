@@ -35,13 +35,8 @@
 	$lots[2]['description'] = 'Fine thin wool broadcloth, double breasted, notched collar, horizontal front and side waist seam, slim long sleeves with notched cuffs, curved tails, black silk satin lining quilted in diamond pattern, padded and quilted chest, black silk covered buttons, (buttons worn) excellent.';
 	$lots[2]['price'] = 3450.00;
 	
-	
-	
+?>
 
-
-<p> TEST </p>
-
-<p> 
 
 
 
