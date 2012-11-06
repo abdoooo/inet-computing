@@ -1,4 +1,4 @@
-<?php 	$myVar1 = TRUE; // No quotes and case-insensitive 
+ <?php 	$myVar1 = TRUE; // No quotes and case-insensitive 
 		$myVar2 = FALSE; 
 ?>
 
