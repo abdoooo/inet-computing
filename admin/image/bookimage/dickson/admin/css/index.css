@@ -1,0 +1,64 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body{
+	margin: 							0px;
+	padding:							0px;
+	background-image: 		url(../image/bg_adminbg.png);
+	background-repeat:		repeat;
+	width:								1024;
+	height:								768;
+}
+
+.Title {
+	font-family:"Myriad Pro", "Gill Sans", "Optima ExtraBlack";
+	font-size: 24px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	color: red;
+	font-family:Tahoma, Geneva, sans-serif;
+	text-align:center;
+}
+
+.subtitle {
+	font-family:"Tahomo", "Gill Sans", "Optima ExtraBlack";
+	font-size: 24px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	color: red;
+	font-family:Tahoma, Geneva, sans-serif;
+	text-align:left;
+}
+
+.content {
+	font-family:"Tahomo", "Gill Sans", "Optima ExtraBlack";
+	font-size: 18px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	color: #000000;
+	text-align: justify;
+}
+
+a:link {
+	text-decoration: none;
+	color: #FFF;
+}
+a:visited {
+	text-decoration: none;
+	color: #FFF;
+}
+a:hover {
+	text-decoration: none;
+	color: #FFF;
+}
+a:active {
+	text-decoration: none;
+	color: #FFF;
+	text-align: right;
+}
