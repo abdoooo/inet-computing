@@ -44,10 +44,10 @@ if(isset($_POST['email'])){
 
 if(isset($_SESSION['email'])){
   if(isset($_SESSION['pass'])){
-  $normal = 1;
-  include ('loginbody.php');
-  //include ('loginheader.php');
-  include ('footer.html');
+    $normal = 1;
+    include ('loginheader.php');
+    include ('loginbody.php');
+    include ('footer.html');
   }
 }
 
