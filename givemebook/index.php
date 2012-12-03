@@ -1,9 +1,9 @@
 <html>
 <head>
 <title>Give Me Book</title>
-<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap.css" rel="stylesheet" media="screen">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.js"></script>
 </head>
 <body>
 
@@ -56,6 +56,8 @@ if($normal == 0){
   include ('login.html');
   include ('footer.html');
 }
+
+
 
 ?>
 <!-- Le javascript

@@ -14,21 +14,42 @@
           <a class="brand" href="#">Give me Book</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
+              
+              
               <li
-              <?php if(!isset($_GET['mybook'])){ echo "class=active";} ?>
-              ><a href="index.php">Most Recent</a></li>
+              <?php if(isset($_GET['recent'])){ echo "class=active";} ?>
+              ><a href="index.php?recent=1">Most Recent</a></li>
+              
+              
               <li
               
               <?php if(isset($_GET['mybook'])){ echo "class=active";} ?>
               
               ><a href="index.php?mybook=1">My book</a></li>
+              
+              
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Category<b class="caret"></b></a>
     				<ul class="dropdown-menu">
-      <!-- links -->
+					<li><a href="index.php?cat=eng">English</a></li>
+                    <li><a href="index.php?cat=lau">Languages</a></li>
+                    <li><a href="index.php?cat=his">History</a></li>
+                    <li><a href="index.php?cat=acc">Accounting</a></li>
+                    <li><a href="index.php?cat=sci">Science</a></li>
+                    <li><a href="index.php?cat=com">Computer</a></li>
+                    <li><a href="index.php?cat=engi">Engineering</a></li>
+                    <li><a href="index.php?cat=mus">Music</a></li>
+                    <li><a href="index.php?cat=art">Art</a></li>
+                    <li><a href="index.php?cat=oth">Other</a></li>
     				</ul>
   				</li>
-              <li class="span1 offset3"></li>
-
+              <li
+			  
+			  <?php if(isset($_GET['upload'])){ echo "class=active";} ?>
+              
+              ><a class="" href="index.php?upload=0">Upload</a></li>
+              
+              
+			  <li class="span1 offset2"></li>
               <li class="nav actions"><a class="" href="index.php?sign=0">SignOut</a></li>
 
             </ul>

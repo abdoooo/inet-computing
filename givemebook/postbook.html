@@ -1,0 +1,66 @@
+<link href="../assets/css/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+      .form-signin {
+        max-width: 450px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+</style>
+<link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+<div class=container>
+
+<form class="signin">
+<table align="center" width="50%">
+    <tr><td><legend>Post Book</legend></td></tr>
+    <tr><td width="30%"><label>Book Name</label></td>
+    <td><input class="input-block-level" type="text" placeholder="Book name"></td></tr>
+    <tr><td><label>ISBN</label></td>
+    <td><input class="input-block-level" type="text" placeholder="ISBN"></td></tr>
+        <tr><td><label>Author</label></td>
+    <td><input class="input-block-level" type="text" placeholder="Author"></td></tr>
+        <tr><td><label>Publisher</label></td>
+    <td><input class="input-block-level" type="text" placeholder="Publisher"></td></tr>
+    <tr><td>Information:</td><td><textarea rows="3"></textarea></td></tr>
+    
+    <tr><td>Category</td>
+    <td><Select>
+        <option>-------</option>
+        <option>English</option>
+        <option>Languages</option>
+        <option>History</option>
+        <option>Accounting</option>
+        <option>Science</option>
+        <option>Computer</option>
+        <option>Engineering</option>
+        <option>Music</option>
+        <option>Art</option>
+        <option>Other</option>
+    </Select>
+    <br /></td></tr>
+    <tr><td>Book Cover</td><td><input type="hidden" name="MAX_FILE_SIZE" value="500" />
+<input type="file" name="uploadField" /></td></tr>
+    <tr><td></td><td><button type="submit" class="btn btn-primary">Submit</button> <button type="button" class="btn">Cancel</button></td></tr>
+</table>
+</form>
+
+</div>
