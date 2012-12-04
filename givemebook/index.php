@@ -16,10 +16,10 @@ session_start();
 $normal = 0;
 
 if(isset($_GET['sign'])){
-unset($_SESSION['email']);
-unset($_SESSION['pass']);
-session_destroy();
-$normal = 0;
+	unset($_SESSION['email']);
+	unset($_SESSION['pass']);
+	session_destroy();
+	$normal = 0;
 }
 
 if(isset($_POST['email'])){
@@ -41,6 +41,39 @@ if(isset($_POST['email'])){
      }
 }
 
+if(isset($_GET['signpost'])){
+	$status = $_GET['signpost'];
+	if($status == 1){
+		 $postemail = $_POST['emailup'];
+         $postpass = $_POST['passup'];
+		if(!checklogin($postemail, $postpass)){
+			$postsql = "INSERT INTO `userinfo` VALUES (NULL, '$postemail', '$postpass', NULL, NULL);";
+		   include('postinformation.php');
+		   postthing($postsql);
+		}else{
+		echo "<div align=\"center\"><h3 class=text-error>Email is already used.</h3></div>";
+		}
+	}
+}
+
+if(isset($_GET['postbook'])){
+	
+$postemail = $_SESSION['email'];
+$bookname = $_POST['bookname'];
+$isbn = $_POST['isbn'];
+$author = $_POST['auth'];
+$publisher = $_POST['pub'];
+$info = $_POST['info'];
+$cat = $_POST['cat'];
+$cove = "";
+$datetime = date('Y-m-d H:i:s', time());
+
+	include ('uploadfile.php');
+	$postsql = "INSERT INTO `bookpost` VALUES (NULL, 'testbook', '$cat', '$author', '$publisher', '$info', '$isbn', '$cove', '$postemail', '$datetime', '0');";
+	include('postinformation.php');
+ 	postthing($postsql);
+//echo "<br><br>$php_unix_timestamp";
+}
 
 if(isset($_SESSION['email'])){
   if(isset($_SESSION['pass'])){
@@ -53,7 +86,7 @@ if(isset($_SESSION['email'])){
 
 if($normal == 0){
   include ('header.php');
-  include ('login.html');
+  include ('login.php');
   include ('footer.html');
 }
 

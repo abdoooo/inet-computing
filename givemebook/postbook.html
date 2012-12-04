@@ -26,39 +26,64 @@
       }
 </style>
 <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+<script language="javascript">
+	function checkinfo() {
+		var bookname = document.getElementById('bookname');
+		var info = document.getElementById('info');
+		var cat = document.getElementById('cat');
+		var word = "";
+
+	if(bookname.value == ""){
+	 word = "\n-Book name";
+	}
+	if(info.value == ""){
+	 word = word +"\n-Information";
+	}
+	if(cat.value == ""){
+	 word = word + "\n-Category";
+	}
+	if(word != ""){
+	alert("You must fill in the following fields. " + word);
+	return false;
+	}
+}
+</script>
+
+
+
 
 <div class=container>
 
-<form class="signin">
+<form  enctype="multipart/form-data" method="post" action="index.php?postbook=1" class="signin" onSubmit="return checkinfo();">
 <table align="center" width="50%">
     <tr><td><legend>Post Book</legend></td></tr>
-    <tr><td width="30%"><label>Book Name</label></td>
-    <td><input class="input-block-level" type="text" placeholder="Book name"></td></tr>
+    <tr><td width="30%"><label>*Book Name</label></td>
+    <td><input id="bookname" name="bookname" class="input-block-level" type="text" placeholder="Book name"></td></tr>
     <tr><td><label>ISBN</label></td>
-    <td><input class="input-block-level" type="text" placeholder="ISBN"></td></tr>
+    <td><input name="isbn" class="input-block-level" type="text" placeholder="ISBN"></td></tr>
         <tr><td><label>Author</label></td>
-    <td><input class="input-block-level" type="text" placeholder="Author"></td></tr>
+    <td><input name="auth" class="input-block-level" type="text" placeholder="Author"></td></tr>
         <tr><td><label>Publisher</label></td>
-    <td><input class="input-block-level" type="text" placeholder="Publisher"></td></tr>
-    <tr><td>Information:</td><td><textarea rows="3"></textarea></td></tr>
+    <td><input name="pub" class="input-block-level" type="text" placeholder="Publisher"></td></tr>
+    <tr><td>*Information:</td><td><textarea id="info" name="info" rows="3"></textarea></td></tr>
     
-    <tr><td>Category</td>
-    <td><Select>
-        <option>-------</option>
-        <option>English</option>
-        <option>Languages</option>
-        <option>History</option>
-        <option>Accounting</option>
-        <option>Science</option>
-        <option>Computer</option>
-        <option>Engineering</option>
-        <option>Music</option>
-        <option>Art</option>
-        <option>Other</option>
+    <tr><td>*Category</td>
+    <td><Select name="cat" id="cat">
+        <option value="" selected="selected">-------</option>
+        <option value="eng">English</option>
+        <option value="lan">Languages</option>
+        <option value="his">History</option>
+        <option value="acc">Accounting</option>
+        <option value="sci">Science</option>
+        <option value="com">Computer</option>
+        <option value="engi">Engineering</option>
+        <option value="mus">Music</option>
+        <option value="art">Art</option>
+        <option value="oth">Other</option>
     </Select>
     <br /></td></tr>
-    <tr><td>Book Cover</td><td><input type="hidden" name="MAX_FILE_SIZE" value="500" />
-<input type="file" name="uploadField" /></td></tr>
+    <tr><td>Book Cover</td><td>
+<input id="file" type="file" name="file" /></td></tr>
     <tr><td></td><td><button type="submit" class="btn btn-primary">Submit</button> <button type="button" class="btn">Cancel</button></td></tr>
 </table>
 </form>
