@@ -47,6 +47,16 @@
 	return false;
 	}
 }
+	
+	//This function uses the ISBN to search the Book Cover using the Web Service from OpenLibrary
+	function search(){
+			var isbn = document.getElementById("formCover").isbn.value;
+			var input = '<img src="http://covers.openlibrary.org/b/isbn/'+isbn+'-M.jpg">'
+ 		    document.getElementById("image").innerHTML = input; 
+		}
+	
+
+
 </script>
 
 
@@ -88,4 +98,23 @@
 </table>
 </form>
 
+
+<form id="formCover">
+	
+	<table align="center" width="50%">
+		<tr><td><h2>Testing the Function use the following ISBNS </h2></td> </tr>
+		<tr><td>JAVA:</td><td> 0596009208	</td></tr> 	
+		<tr><td>PHP:</td><td> 0071508546	</td></tr> 	
+		<tr><td>Simpson:</td><td> 0007234058	</td></tr>
+		<tr></tr>
+
+		<tr><td><label>ISBN</label></td>
+		<td><input name="isbn" type="text" placeholder="ISBN"></td></tr>
+		<tr><td></td></tr> 
+	</table> 
+</form>
+	<table align="center" width="50%">
+		<tr><td><button onclick="search()"> Search </button></td></tr>
+		<tr><td><p id="image"> Hier sollte was stehen</p></td></tr>
+	</table>
 </div>
