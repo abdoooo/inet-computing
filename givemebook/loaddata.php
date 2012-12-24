@@ -11,6 +11,20 @@ if($type == "recent"){
   $sql = "SELECT * FROM  `bookpost` ORDER BY  `datatime` DESC LIMIT  $lowerpage , $maxpage;";
 }
 
+if($type == "cat"){
+
+$cata = $_GET['cat'];	
+
+$sql = "SELECT * FROM `bookpost` WHERE `cata` = \"$cata\"";
+}
+
+if($type == "search"){
+
+$search_data = $_POST['search_data'];
+	
+$sql = "SELECT * FROM `bookpost` WHERE `name` LIKE \"%$search_data%\" or `cata` LIKE \"%$search_data%\" or`author` LIKE \"%$search_data%\" or `publisher` LIKE \"%$search_data%\" or `info` LIKE \"%$search_data%\" or `code` LIKE \"%$search_data\" or `useremail` LIKE \"%$search_data%\"";
+}
+
 $process = mysql_query($sql) or die('MySQL query error');
 while($row = mysql_fetch_array($process)){
 	$nam = $row['name'];
@@ -75,7 +89,7 @@ while($row = mysql_fetch_array($process)){
 	echo "<td>ISBN: $cod</td></tr>";
 	echo "<tr><td>Author: $aut</td></tr>";
 	echo "<tr><td>Publisher: $pub</td></tr>";
-	echo "<tr><td>Detail: $inf</td></tr>";
+	echo "<tr><td><div>Upload User: $test</div><br><div>Detail: $inf</div></td></tr>";
 	echo "<tr><td>Category: $cat</td></tr>";
 	echo "</tbody>";
 	echo "</table></div><br>";
