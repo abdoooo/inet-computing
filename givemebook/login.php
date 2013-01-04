@@ -49,11 +49,17 @@
 		var pass1 = document.getElementById('passup');
 		var pass2 = document.getElementById('pass2');
 		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		var filter2 = /\S{8,}/;
 		if (!filter.test(email.value)) {
 			alert('Please provide a valid email address');
 			email.focus;
 			return false;
 	   }else{
+		   if(!filter2.test(pass1.value)){
+		   	alert('Password too short(at least 8 characters).');
+			pass1.focus;
+			return false;
+		   }
 		   if(pass1.value != pass2.value){
 			alert('Two passwords are difference.');
 			pass1.focus;
@@ -73,6 +79,8 @@ if(isset($_GET['signup'])){ ?>
 <P>
 <img src="./images/mainlogo.jpeg" width="460" height="276">
 </P>
+<input type="text" class="input-block-level" placeholder="First name" id="fname" name="fname">
+<input type="text" class="input-block-level" placeholder="Last name" id="lname" name="lname">
 <input type="text" class="input-block-level" placeholder="Email address" id="emailup" name="emailup">
 <input type="password" class="input-block-level" placeholder="Password" name="passup" id="passup">
 <input type="password" class="input-block-level" placeholder="re-type" name="pass2" id="pass2">
@@ -80,6 +88,7 @@ if(isset($_GET['signup'])){ ?>
 </form>
 <?php }else{?>
 <form class="form-signin" action="index.php?recent=1" method="post">
+<p><a href="index.php?facebook=login"><img src="./images/fb_login_icon.gif"></a></p>
 <P>
 <img src="./images/mainlogo.jpeg" width="460" height="276">
 </P>
@@ -87,6 +96,7 @@ if(isset($_GET['signup'])){ ?>
 <input type="password" class="input-block-level" placeholder="Password" name="pass">
 <button class="btn btn-large btn-block btn-primary"" type="submit">Log-in</button>
 </form>
+
 <?php }?>
 </div> <!-- /container -->
 </body>

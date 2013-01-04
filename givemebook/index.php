@@ -1,20 +1,33 @@
-
-<html>
+<?php session_start(); ?>
+<!DOCTYPE HTML>
+<html lang="en">
 <head>
-<title>Give Me Book</title>
+<meta charset="utf-8">
+<title>Give me Book</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="css/bootstrap-responsive.css" rel="stylesheet">
-<link href="css/bootstrap.css" rel="stylesheet" media="screen">
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="js/bootstrap.js"></script>
-</head>
-<body>
+<meta name="description" content="">
+<meta name="author" content="">
 
+<!-- Le styles -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+body {
+padding-top: 60px;
+padding-bottom: 40px;
+}
+</style>
+
+<link href="css/bootstrap-responsive.css" rel="stylesheet"> 
+</head>
+
+<body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
 <?php
 include ('connectdb.php');
 include ('checklogin.php');
-session_start();
+
 
 $normal = 0;
 
@@ -25,6 +38,22 @@ if(isset($_GET['sign'])){
 	$normal = 0;
 }
 
+if(isset($_GET['facebook'])){
+	$facebook =	$_GET['facebook'];
+	if($facebook == "login"){
+		$normal = 1;
+		checkfacebook();
+	}elseif($facebook == "logout"){
+		$facebook->destroySession();
+		unset($_SESSION['email']);
+		unset($_SESSION['pass']);
+		session_destroy();
+		$normal = 0;
+	}
+}
+
+
+
 if(isset($_POST['email'])){
      if($_POST['email'] == ""){
          echo "ERROR: Please enter your email";
@@ -32,14 +61,15 @@ if(isset($_POST['email'])){
          echo"ERROR: Please enter your password";
          }else{
          $postemail = $_POST['email'];
-         $postpass = $_POST['pass'];
+         $postpass = md5($_POST['pass']);
          if(checklogin($postemail, $postpass)){
           $normal = 1;
 		  $_SESSION['email'] = $postemail; 
-		  $_SESSION['pass'] = $postpass; 
+		  $_SESSION['pass'] = $postpass;
+		   
          }else{
          $normal = 0;
-         echo"Login error";
+         echo"<div align=\"center\"><h3 class=text-info>Login error</h3></div>";
          }
      }
 }
@@ -47,35 +77,56 @@ if(isset($_POST['email'])){
 if(isset($_GET['signpost'])){
 	$status = $_GET['signpost'];
 	if($status == 1){
-		 $postemail = $_POST['emailup'];
-         $postpass = $_POST['passup'];
-		if(!checklogin($postemail, $postpass)){
-			$postsql = "INSERT INTO `userinfo` VALUES (NULL, '$postemail', '$postpass', NULL, NULL);";
-		   include('postinformation.php');
-		   postthing($postsql);
+		 include('uploadinformation.php');
+		 $postfname = ucfirst($_POST['fname']);
+         $postlname = ucfirst($_POST['lname']);
+         $postpass = md5($_POST['passup']);
+		if(isset($_GET['editprofile'])){
+			$email = $_SESSION['email'];
+			if($postpass == ""){
+			$postsql = "UPDATE `userinfo` SET `firstname` = '$postfname', `lastname` = '$postlname' WHERE `email` = '$email';";
+			}else{
+			$postsql = "UPDATE `userinfo` SET `firstname` = '$postfname', `lastname` = '$postlname', `password` = '$postpass' WHERE `email` = '$email';";
+			}
+			postthing($postsql);
 		}else{
-		echo "<div align=\"center\"><h3 class=text-error>Email is already used.</h3></div>";
+			$postemail = $_POST['emailup'];
+			if(!checklogin($postemail, $postpass)){
+	
+				$postsql = "INSERT INTO `bookdb`.`userinfo` (`userid`, `email`, `firstname`, `lastname`, `password`, `0`, `logintime`, `block`) VALUES ('0', '$postemail', '$postfname', '$postlname', '$postpass', NULL, '0');";
+				
+			   	postthing($postsql);
+			}else{
+			   	echo "<div align=\"center\"><h3 class=text-error>Email is already used.</h3></div>";
+			}
 		}
 	}
 }
 
 if(isset($_GET['postbook'])){
-	
+include('uploadinformation.php');
+if(isset($_GET['del'])){
+$del = $_GET['del'];
+$postsql = "DELETE FROM `bookpost` WHERE `bookid` = $del;";
+postthing($postsql);
+}else{
 $postemail = $_SESSION['email'];
-$bookname = $_POST['bookname'];
+$bookname = $_POST['bookname']; 
 $isbn = $_POST['isbn'];
+$price = $_POST['pri'];
 $author = $_POST['auth'];
 $publisher = $_POST['pub'];
 $info = $_POST['info'];
 $cat = $_POST['cat'];
-$cove = "";
+	if($_POST['image_h'] != ""){
+		$cove = $_POST['image_h'];
+	}else{
+		$cove = "";
+	}
 $datetime = date('Y-m-d H:i:s', time());
 
-	include ('uploadfile.php');
-	$postsql = "INSERT INTO `bookpost` VALUES (NULL, 'testbook', '$cat', '$author', '$publisher', '$info', '$isbn', '$cove', '$postemail', '$datetime', '0');";
-	include('postinformation.php');
- 	postthing($postsql);
-//echo "<br><br>$php_unix_timestamp";
+	include ('uploadbook.php');
+}
 }
 
 if(isset($_SESSION['email'])){
@@ -96,21 +147,8 @@ if($normal == 0){
 
 
 ?>
-<!-- Le javascript
-    ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-    <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>
+
+
+<script src="jquery_1.7.2.js"></script>
 </body>
 </html>

@@ -15,7 +15,7 @@ if ((($_FILES["file"]["type"] == "image/JPEG")
 // random 4 digit to add to our file name 
 // some people use date and time in stead of random digit 
 $random_digit=rand(0000,9999);
-$cove = 
+//$cove = 
 //combine random digit to you file name to create new file name
 //use dot (.) to combile these two variables
 
@@ -29,7 +29,7 @@ $path= "bookimg/".$new_file_name;
 
 if(copy($_FILES['file']['tmp_name'], $path))
 {
-echo "Successful<BR/>"; 
+echo "<div align=\"center\"><h3 class=text-info>Picture Uploaded</h3></div>"; 
 
 //$new_file_name = new file name
 //$HTTP_POST_FILES['ufile']['size'] = file size
@@ -40,12 +40,13 @@ echo "Successful<BR/>";
 }
 else
 {
-echo "Error";
+echo "<div align=\"center\"><h3 class=text-info>Upload Picture Error</h3></div>";
+	//copy($httpimage, '/bookimg/file$random_digit.jpeg');
 }
   }
 else
   {
-  echo "Invalid file";
+  echo "<div align=\"center\"><h3 class=text-info>Upload Picture Error: Invalid file type</h3></div>";
   }
 
 

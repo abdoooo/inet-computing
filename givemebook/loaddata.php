@@ -8,14 +8,26 @@ if($type == "mybook"){
   $sql = "SELECT * FROM `bookpost` WHERE `useremail` = \"$user\" ORDER BY `datatime` DESC LIMIT $lowerpage , $maxpage;";
 }
 if($type == "recent"){
-  $sql = "SELECT * FROM  `bookpost` ORDER BY  `datatime` DESC LIMIT  $lowerpage , $maxpage;";
+  $sql = "SELECT * FROM  `bookpost` WHERE `hidden` = 0 ORDER BY  `datatime` DESC LIMIT  $lowerpage , $maxpage;";
 }
+
+if($type == "myorder"){
+  $sql = "SELECT * FROM `bookpost`, `order` WHERE `order`.`email` = '$user' AND `order`.`bookid`= `bookpost`.`bookid`";
+}
+
 
 if($type == "cat"){
 
 $cata = $_GET['cat'];	
 
-$sql = "SELECT * FROM `bookpost` WHERE `cata` = \"$cata\"";
+$sql = "SELECT * FROM `bookpost` WHERE `cata` = \"$cata\" and `hidden` = 0";
+}
+
+if($type == "edit"){
+
+$edit = $_GET['editbook'];	
+
+$sql = "SELECT * FROM `bookpost` WHERE `bookid` = $edit and `useremail` = \"$user\"";
 }
 
 if($type == "search"){
@@ -27,14 +39,18 @@ $sql = "SELECT * FROM `bookpost` WHERE `name` LIKE \"%$search_data%\" or `cata` 
 
 $process = mysql_query($sql) or die('MySQL query error');
 while($row = mysql_fetch_array($process)){
+	$bookid =  $row['bookid'];
 	$nam = $row['name'];
 	$cat =  $row['cata'];
+	$cata =  $row['cata'];
 	$aut =  $row['author'];
 	$pub =  $row['publisher'];
 	$inf =  nl2br($row['info']);
 	$cod =  $row['code'];
 	$pic =  $row['pic'];
-	$test = $row['useremail'];
+	$usermail = $row['useremail'];
+	$price = $row['price'];
+	$hidden = $row['hidden'];
 	
 	switch ($cat){
 	case "eng":
@@ -78,21 +94,49 @@ while($row = mysql_fetch_array($process)){
 	break;
 	}
 	
-	echo "<div class=container><table class=\"table table-hover\">";
-	echo "<thead><tr><th>$nam</th><th></th></tr></thead>";
+	$edit="";
+	$order="";
+	if($type == "mybook"){
+		if($hidden == 0){
+		$edit = "<a href=index.php?editbook=$bookid>[Edit]</a>";
+		}else{
+		$edit = "(The book is hidden) <a href=index.php?editbook=$bookid>[Edit]</a>";
+		}
+	}elseif($type == "edit"){
+		if($hidden == 0){
+			$edit = "<a href=index.php?editbook=$bookid&hidden=1>[Hidden]</a>";
+		}else{
+			$edit = "(The book is hidden) <a href=index.php?editbook=$bookid&hidden=0>[Show]</a>";
+		}
+	}
+	
+	echo "<div class=container><div class=span11><table class=\"table table-hover\">";
+	echo "<thead><tr><th colspan=3>$nam $edit [Seller: $usermail]</th></tr></thead>";
 	echo "<tbody><tr>";
 	if($pic == ""){
-	  echo "<td width=\"20%\" rowspan=5><img src=\"./images/no.jpg\" /></td>";
+	  echo "<td width=\"20%\" rowspan=6><img src=\"./images/no.jpg\" /></td>";
 	}else{
-	  echo "<td width=\"20%\" rowspan=5><img src=\"./bookimg/$pic\" /></td>";	
+	  if(substr($pic,0,4) == "<img")
+	  echo "<td width=\"20%\" rowspan=6>$pic</td>";	
+	  else
+	  echo "<td width=\"20%\" rowspan=6><img src=\"./bookimg/$pic\" /></td>";  
 	}
-	echo "<td>ISBN: $cod</td></tr>";
-	echo "<tr><td>Author: $aut</td></tr>";
-	echo "<tr><td>Publisher: $pub</td></tr>";
-	echo "<tr><td><div>Upload User: $test</div><br><div>Detail: $inf</div></td></tr>";
-	echo "<tr><td>Category: $cat</td></tr>";
-	echo "</tbody>";
-	echo "</table></div><br>";
+	echo "<td width=\"9%\">ISBN:</td><td>$cod</td><td width=\"10%\" rowspan=5>";
+	include('checkorder.php');
+	echo "</td></tr><tr><td>Author:</td><td>$aut</td></tr>";
+	echo "<tr><td>Publisher:</td><td>$pub</td></tr>";
+	echo "<tr><td>Information:</td><td>$inf</td></tr>";
+	echo "<tr><td>Category:</td><td>$cat</td>";
+
+	echo "<tr><td>Price:</td><td>$$price ";
+
+	
+
+	echo " </td></tr></tbody>";
+	echo "</table></div></div><br>";
+}
+if($type == "edit"){
+	return array($bookid, $nam, $cat, $aut, $pub, $inf, $cod, $pic, $usermail, $price, $hidden, $cata);
 }
 }
 ?>
