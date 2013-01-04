@@ -2,12 +2,12 @@
 include ('connectdb.php');
 $sql = "SELECT `name` FROM `bookpost`";
 $data = mysql_query($sql);
-
 $output = "";
+
 while($row = mysql_fetch_array($data)){
-$output .= "\"";
-$output .= $row['name'];
-$output .= "\",";
+	$output .= "\"";
+	$output .= $row['name'];
+	$output .= "\",";
 } 
 
 $output = rtrim($output, "\,");

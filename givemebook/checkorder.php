@@ -17,6 +17,8 @@ function delord() {
 
 }
 </script>
+
+
 <?php
 $name = $_SESSION['email'];
 if(isset($_GET['recent']) || isset($_GET['cat'])||isset($_GET['myorder'])){
@@ -38,18 +40,24 @@ if(isset($_GET['recent']) || isset($_GET['cat'])||isset($_GET['myorder'])){
 	}
 }elseif(isset($_GET['mybook'])){
 ?>	
+
+
+
 <div class="btn-group">
-  <button class="btn btn-small">View Order (
-<?php
-$ordersql = "SELECT `userinfo`.`email`, `userinfo`.`facebook`, `order`.* FROM `order`, `userinfo` WHERE `bookid` = '$bookid' AND `order`.`email` = `userinfo`.`email` ORDER BY `datatime`";
-	$process2 = mysql_query($ordersql) or die('MySQL query error');
-	$total_rows = mysql_num_rows($process2);
-	echo "$total_rows "; 
-?>
+<button class="btn btn-small">View Order (
+
+
+	<?php
+    $ordersql = "SELECT `userinfo`.`email`, `userinfo`.`facebook`, `order`.* FROM `order`, `userinfo` WHERE `bookid` = '$bookid' AND `order`.`email` = `userinfo`.`email` ORDER BY `datatime`";
+    $process2 = mysql_query($ordersql) or die('MySQL query error');
+    $total_rows = mysql_num_rows($process2);
+    echo "$total_rows "; 
+    ?>
 )</button>
-  <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
-    <span class="caret"></span>
-     </button>
+
+
+<button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+<span class="caret"></span></button>
   <ul class="dropdown-menu">
     <?php
 	$count = 0;
@@ -66,7 +74,9 @@ $ordersql = "SELECT `userinfo`.`email`, `userinfo`.`facebook`, `order`.* FROM `o
    ?>
   </ul>
 </div>
-<br>1.Right Click Email<br>
+
+<br>
+1.Right Click Email<br>
 2.Open Link With<br>
 3.Gmail<br>
 <?php

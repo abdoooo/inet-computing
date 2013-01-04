@@ -73,31 +73,28 @@
 
 <body>
 <div class="container">
-<?php
-if(isset($_GET['signup'])){ ?>
-<form class="form-signin" action="index.php?signpost=1" method="post" onSubmit="return checkEmail();">
-<P>
-<img src="./images/mainlogo.jpeg" width="460" height="276">
-</P>
-<input type="text" class="input-block-level" placeholder="First name" id="fname" name="fname">
-<input type="text" class="input-block-level" placeholder="Last name" id="lname" name="lname">
-<input type="text" class="input-block-level" placeholder="Email address" id="emailup" name="emailup">
-<input type="password" class="input-block-level" placeholder="Password" name="passup" id="passup">
-<input type="password" class="input-block-level" placeholder="re-type" name="pass2" id="pass2">
-<button class="btn btn-large btn-block btn-danger"" type="submit">Sign Up</button>
-</form>
-<?php }else{?>
-<form class="form-signin" action="index.php?recent=1" method="post">
-<p><a href="index.php?facebook=login"><img src="./images/fb_login_icon.gif"></a></p>
-<P>
-<img src="./images/mainlogo.jpeg" width="460" height="276">
-</P>
-<input type="text" class="input-block-level" placeholder="Email address" name="email">
-<input type="password" class="input-block-level" placeholder="Password" name="pass">
-<button class="btn btn-large btn-block btn-primary"" type="submit">Log-in</button>
-</form>
-
-<?php }?>
+	<?php
+    if(isset($_GET['signup'])){ ?>
+        <form class="form-signin" action="index.php?signpost=1" method="post" onSubmit="return checkEmail();">
+            <P><img src="./images/mainlogo.jpeg" width="460" height="276"></P>
+            
+            <input type="text" class="input-block-level" placeholder="First name" id="fname" name="fname">
+            <input type="text" class="input-block-level" placeholder="Last name" id="lname" name="lname">
+            <input type="text" class="input-block-level" placeholder="Email address" id="emailup" name="emailup">
+            <input type="password" class="input-block-level" placeholder="Password" name="passup" id="passup">
+            <input type="password" class="input-block-level" placeholder="re-type" name="pass2" id="pass2">
+            <button class="btn btn-large btn-block btn-danger"" type="submit">Sign Up</button>
+            </form>
+	<?php }else{?>
+        <form class="form-signin" action="index.php?recent=1" method="post">
+            <p><a href="index.php?facebook=login"><img src="./images/fb_login_icon.gif"></a></p>
+            <P><img src="./images/mainlogo.jpeg" width="460" height="276"></P>
+            <input type="text" class="input-block-level" placeholder="Email address" name="email">
+            <input type="password" class="input-block-level" placeholder="Password" name="pass">
+            <button class="btn btn-large btn-block btn-primary"" type="submit">Log-in</button>
+        </form>
+    
+    <?php }?>
 </div> <!-- /container -->
 </body>
 </html>

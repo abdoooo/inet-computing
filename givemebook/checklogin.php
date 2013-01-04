@@ -15,7 +15,6 @@ $process = mysql_query($sql) or die('MySQL query error');
 
 function checkfacebook(){
 require './fb/facebook.php';
-
 $facebook = new Facebook(array(
   'appId'  => '430750040324017',
   'secret' => '9270d721dd3ace32a18e0548a1aee947',
