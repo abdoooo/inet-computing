@@ -119,7 +119,7 @@ while($row = mysql_fetch_array($process)){
 	  if(substr($pic,0,4) == "<img")
 	  echo "<td width=\"20%\" rowspan=6>$pic</td>";	
 	  else
-	  echo "<td width=\"20%\" rowspan=6><img src=\"./bookimg/$pic\" /></td>";  
+	  echo "<td width=\"20%\" rowspan=6><img width=\"180\" height=\"209\" src=\"./bookimg/$pic\" /></td>";  
 	}
 	echo "<td width=\"9%\">ISBN:</td><td>$cod</td><td width=\"10%\" rowspan=5>";
 	include('checkorder.php');

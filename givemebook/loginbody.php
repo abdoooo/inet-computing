@@ -29,9 +29,11 @@ echo "Welcome, $name <a href=index.php?editprofile=1>(Edit)</a>";
 }
 
 ?>
-<form id="startsearch" name="startsearch" action="index.php?search=1" method="post" class="navbar-search pull-right" onsubmit="return checkData();">
-  <input id="search_data" name="search_data" type="text" data-provide="typeahead" placeholder="Search">
+
+<form id="startsearch" name="startsearch" action="index.php?search=1" method="post" class="navbar-search pull-right" onsubmit="return checkData();"><div class="input-append">
+<input class="span2" id="search_data" name="search_data" type="text" data-provide="typeahead" placeholder="Search" data-source='[<?php include ('searchdata.txt'); ?>]'><button type="submit" class="btn">Search</button></div>
 </form>
+
 </div>
 </div>
 
